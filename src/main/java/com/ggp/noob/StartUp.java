@@ -56,10 +56,16 @@ public class StartUp {
                     }
                     System.out.println(host);
                     System.out.println(port);
+                    System.out.println(requestType);
                     proxySocket = new Socket(host.trim(),port);
                     proxyInputStream = proxySocket.getInputStream();
                     proxyOutputStream = proxySocket.getOutputStream();
-                    proxyOutputStream.write(request.toString().getBytes());
+                    if(requestType.equalsIgnoreCase("CONNECT")){
+                        clientOutputStream.write("HTTP/1.1 200 Connection Established\r\n\r\n".getBytes());
+                        clientOutputStream.flush();
+                    }else{
+                        proxyOutputStream.write(request.toString().getBytes());
+                    }
                     /**
                      * 已经建立过通道了，不需要在握手了
                      */

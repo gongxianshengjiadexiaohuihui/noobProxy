@@ -1,8 +1,6 @@
 package com.ggp.noob;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 
 /**
  * @Author:GGP
@@ -22,6 +20,7 @@ public class ProxyHandler extends Thread {
     public void run() {
         try {
             while (true) {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(input));
                 output.write(input.read());
             }
         } catch (IOException e) {
